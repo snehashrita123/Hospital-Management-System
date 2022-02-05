@@ -9,7 +9,7 @@ using HOSPITAL_MANAGEMENT_SYSTEM.Models;
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 {
     [RoutePrefix("api/PatientsInsert")]
-    public class PatientsController : ApiController
+    public class PatientsInsertController : ApiController
     {
         HMSContext DB = new HMSContext();
 
@@ -22,17 +22,17 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 
         [HttpGet]
 
-        public HttpResponseMessage Get(int id)
+        public HttpResponseMessage Get(string email)
         {
 
-            var entity = DB.patientrecord.FirstOrDefault(s => s.PateintID == id);
+            var entity = DB.patientrecord.FirstOrDefault(s => s.Email == email);
             if (entity != null)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, entity);
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, $"Patient with Id {id} not found");
+                return Request.CreateResponse(HttpStatusCode.NotFound, $"Patient with Email {email} not found");
 
 
             }
@@ -56,6 +56,7 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
                 PD.Symptoms = patient.Symptoms;
                 PD.Ward = patient.Ward;
                 DB.patientrecord.Add(PD);
+
                 DB.SaveChanges();
                 var msg = Request.CreateResponse(HttpStatusCode.Created, patient);
                 return msg;
@@ -70,15 +71,15 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 
         [HttpPut]
 
-        public HttpResponseMessage Put([FromUri] int id, [FromBody] Patient_Details patient)
+        public HttpResponseMessage Put([FromUri] string email, [FromBody] Patient_Details patient)
         {
 
             try
             {
-                Patient_Details entity = DB.patientrecord.FirstOrDefault(s => s.PateintID == id);
+                Patient_Details entity = DB.patientrecord.FirstOrDefault(s => s.Email == email);
                 if (entity == null)
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Patient with Id " + id.ToString() + "not found to update");
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Patient with Email " + email.ToString() + "not found to update");
                 }
                 else
                 {

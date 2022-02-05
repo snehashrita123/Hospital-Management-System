@@ -8,7 +8,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
 {
     public class Register
@@ -18,12 +17,8 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
 
 
 
-
-
         [Required, StringLength(50)]
         public string FirstName { get; set; }
-
-
 
 
 
@@ -32,18 +27,13 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
 
 
 
-
-
         [Required]
         public string PhoneNumber { get; set; }
 
 
 
-
-
         [Required, StringLength(50)]
         public string Email { get; set; }
-
 
 
         [Required]

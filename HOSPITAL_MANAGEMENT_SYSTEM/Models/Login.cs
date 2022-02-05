@@ -8,14 +8,12 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
 {
     public class Login
     {
         [Required, StringLength(50)]
         public string Email { get; set; }
-
 
 
         [Required]

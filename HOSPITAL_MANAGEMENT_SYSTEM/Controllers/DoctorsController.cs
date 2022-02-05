@@ -7,9 +7,6 @@ using System.Web.Http;
 using HOSPITAL_MANAGEMENT_SYSTEM.Models;
 
 
-
-
-
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 {
 
@@ -33,7 +30,7 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
         public HttpResponseMessage Get(int id)
         {
 
-            var entity = DB.doctor.FirstOrDefault(s => s.DoctorId == id);
+            var entity = DB.doctor.FirstOrDefault(s => s.DoctorID == id);
             if (entity != null)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, entity);
@@ -52,55 +49,72 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
         [HttpPost]
         public HttpResponseMessage Post([FromBody] Doctor doc)
         {
-            // HttpResponseMessage msg=null;
+            HttpResponseMessage msg = null;
             try
             {
-
-
-
-
-
                 Doctor UL = new Doctor();
-                if (UL.DoctorId == 0)
+                if (UL.DoctorID == 0)
                 {
-                    UL.FirstName = doc.FirstName;
-                    UL.LastName = doc.LastName;
-                    UL.AvailabilityTime = doc.AvailabilityTime;
-                    UL.Specialty = doc.Specialty;
+                    UL.Name = doc.Name;
+                    UL.Gender = doc.Gender;
+                    UL.PhoneNumber = doc.PhoneNumber;
+                    UL.Email = doc.Email;
+                    UL.WorkingDays = doc.WorkingDays;
+                    UL.Speciality = doc.Speciality;
                     UL.Experience = doc.Experience;
-
-
-
 
 
                     DB.doctor.Add(UL);
                     DB.SaveChanges();
-                    // return new Response
-                    // { Status = "Success", Message = "Record SuccessFully Saved." };
-                    // var msg = Request.CreateResponse(HttpStatusCode.Created, Reg);
-
-
-
-
+                    //return new Response
+                    //{ Status = "Success", Message = "Record SuccessFully Saved." };
+                    //var msg = Request.CreateResponse(HttpStatusCode.Created, Reg);
 
                 }
-                var msg = Request.CreateResponse(HttpStatusCode.Created, doc);
+                //var msg = Request.CreateResponse(HttpStatusCode.Created, doc);
                 return msg;
             }
             catch (Exception ex)
             {
 
-
-
-
-
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
-
-
-
             }
         }
-        //[Route("deleteDoctor")]
+
+        [HttpPut]
+        public HttpResponseMessage Put([FromUri] int id, [FromBody] Doctor doc)
+         {
+            try
+            {
+                Doctor UL = DB.doctor.FirstOrDefault(s => s.DoctorID == id);
+                if (UL == null)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Doctor with Id " + id.ToString() + "not found to update");
+                }
+                else
+                {
+
+                    UL.Name = doc.Name;
+                    UL.Gender = doc.Gender;
+                    UL.PhoneNumber = doc.PhoneNumber;
+                    UL.Email = doc.Email;
+                    UL.WorkingDays = doc.WorkingDays;
+                    UL.Speciality = doc.Speciality;
+                    UL.Experience = doc.Experience;
+
+                    DB.SaveChanges();
+                    return Request.CreateResponse(HttpStatusCode.OK, UL);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
+            }
+
+        }
+
+
+        [Route("deleteDoctor")]
         [HttpDelete]
         public HttpResponseMessage Delete(int id)
         {
@@ -109,7 +123,7 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 
 
 
-                var entity = DB.doctor.FirstOrDefault(s => s.DoctorId == id);
+                var entity = DB.doctor.FirstOrDefault(s => s.DoctorID == id);
                 if (entity == null)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Doctor with Id = " + id.ToString() + " not found to delete");

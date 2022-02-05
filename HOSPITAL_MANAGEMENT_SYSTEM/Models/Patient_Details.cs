@@ -9,8 +9,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 
 
-
-
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
 {
     [Table(" patientrecord")]

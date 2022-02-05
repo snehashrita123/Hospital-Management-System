@@ -8,7 +8,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
-
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
 {
     [Table("UserLogin")]
@@ -22,7 +21,6 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
         public string FirstName { get; set; }
 
 
-
         [Required, StringLength(50)]
         public string LastName { get; set; }
 
@@ -33,7 +31,6 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
 
         [Required, StringLength(50)]
         public string Email { get; set; }
-
 
 
         [Required]

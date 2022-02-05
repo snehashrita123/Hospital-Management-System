@@ -162,6 +162,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\BloodDonorController.cs" />
+    <Compile Include="Controllers\BloodRequestController.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />
     <Compile Include="Controllers\PatientsInsertController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -169,12 +171,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202201311407547_Initial.cs" />
-    <Compile Include="Migrations\202201311407547_Initial.designer.cs">
-      <DependentUpon>202201311407547_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\202202040832111_Initial.cs" />
+    <Compile Include="Migrations\202202040832111_Initial.designer.cs">
+      <DependentUpon>202202040832111_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\BloodDonor.cs" />
+    <Compile Include="Models\BloodRequest.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\HMSContext.cs" />
     <Compile Include="Models\Login.cs" />
@@ -266,8 +270,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202201311407547_Initial.resx">
-      <DependentUpon>202201311407547_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202202040832111_Initial.resx">
+      <DependentUpon>202202040832111_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

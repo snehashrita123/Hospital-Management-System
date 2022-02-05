@@ -11,14 +11,17 @@
                 "dbo.doctor",
                 c => new
                     {
-                        DoctorId = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(nullable: false, maxLength: 50),
-                        LastName = c.String(nullable: false, maxLength: 50),
-                        AvailabilityTime = c.DateTime(nullable: false),
-                        Specialty = c.String(nullable: false, maxLength: 50),
-                        Experience = c.Int(nullable: false),
+                        DoctorID = c.Int(nullable: false, identity: true),
+                        Name = c.String(nullable: false),
+                        Gender = c.String(nullable: false),
+                        PhoneNumber = c.String(nullable: false),
+                        Email = c.String(nullable: false, maxLength: 50, unicode: false),
+                        WorkingDays = c.String(nullable: false, maxLength: 100),
+                        Speciality = c.String(nullable: false),
+                        Experience = c.String(nullable: false),
                     })
-                .PrimaryKey(t => t.DoctorId);
+                .PrimaryKey(t => t.DoctorID)
+                .Index(t => t.Email, unique: true);
             
             CreateTable(
                 "dbo.patientrecord",
@@ -54,6 +57,7 @@
         
         public override void Down()
         {
+            DropIndex("dbo.doctor", new[] { "Email" });
             DropTable("dbo.UserLogin");
             DropTable("dbo.patientrecord");
             DropTable("dbo.doctor");

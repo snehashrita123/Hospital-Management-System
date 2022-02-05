@@ -5,10 +5,8 @@ using System.Linq;
 using System.Web;
 
 
-
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
 {
-
 
 
     public class HMSContext : DbContext
@@ -17,13 +15,12 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
         {
 
 
-
         }
         public DbSet<AppUser> UserLogin { get; set; }
         public DbSet<Doctor> doctor { get; set; }
-
-        //public DbSet<Admin_Patient> admin_Patient { get; set; }
-
         public DbSet<Patient_Details> patientrecord { get; set; }
+
+        public DbSet<BloodDonor> BloodDonor { get; set; }
+        public DbSet<BloodRequest> BloodRequest { get; set; }
     }
 }
