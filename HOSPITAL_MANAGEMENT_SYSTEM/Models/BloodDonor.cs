@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
 {
-    [Table("BloodDonor")]
+    [Table("bloodDonor")]
     public class BloodDonor
     {
         [Key]

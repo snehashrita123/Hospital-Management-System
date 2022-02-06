@@ -7,9 +7,6 @@ using System.Web.Http;
 using HOSPITAL_MANAGEMENT_SYSTEM.Models;
 
 
-
-
-
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 {
     //[EnableCors("*", "*", "POST")]
@@ -24,9 +21,6 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
         [HttpGet]
         public HttpResponseMessage Get()
         {
-
-
-
             return Request.CreateResponse(HttpStatusCode.OK, DB.UserLogin.ToList());
         }
 
@@ -92,11 +86,6 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
             // HttpResponseMessage msg=null;
             try
             {
-
-
-
-
-
                 AppUser UL = new AppUser();
                 if (UL.UserId == 0)
                 {
@@ -115,10 +104,6 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
                     // return new Response
                     // { Status = "Success", Message = "Record SuccessFully Saved." };
                     // var msg = Request.CreateResponse(HttpStatusCode.Created, Reg);
-
-
-
-
 
                 }
                 var msg = Request.CreateResponse(HttpStatusCode.Created, Reg);

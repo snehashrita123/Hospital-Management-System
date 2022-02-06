@@ -20,7 +20,7 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
         public DbSet<Doctor> doctor { get; set; }
         public DbSet<Patient_Details> patientrecord { get; set; }
 
-        public DbSet<BloodDonor> BloodDonor { get; set; }
-        public DbSet<BloodRequest> BloodRequest { get; set; }
+        public DbSet<BloodDonor> bloodDonor { get; set; }
+        public DbSet<BloodRequest> bloodRequest { get; set; }
     }
 }

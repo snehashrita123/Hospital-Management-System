@@ -18,13 +18,13 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
         public HttpResponseMessage Get()
         {
 
-            return Request.CreateResponse(HttpStatusCode.OK, DB.BloodDonor.ToList());
+            return Request.CreateResponse(HttpStatusCode.OK, DB.bloodDonor.ToList());
         }
 
         public HttpResponseMessage Get(int id)
         {
 
-            var entity = DB.BloodDonor.FirstOrDefault(s => s.DonorID == id);
+            var entity = DB.bloodDonor.FirstOrDefault(s => s.DonorID == id);
             if (entity != null)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, entity);
@@ -39,9 +39,9 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
         [HttpPost]
         public HttpResponseMessage Post([FromBody] BloodDonor donor)
         {
-            HttpResponseMessage msg = null;
+            //HttpResponseMessage msg = null;
 
-            if (DB.BloodDonor.Any(a => a.DonorPhoneNumber == donor.DonorPhoneNumber))
+            if (DB.bloodDonor.Any(a => a.DonorPhoneNumber == donor.DonorPhoneNumber))
             {
                 return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
             }
@@ -60,14 +60,14 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
                     UL.DonorWeight = donor.DonorWeight;
                     UL.Ishealthy = donor.Ishealthy;
 
-                    DB.BloodDonor.Add(UL);
+                    DB.bloodDonor.Add(UL);
                     DB.SaveChanges();
                     //return new Response
                     //{ Status = "Success", Message = "Record SuccessFully Saved." };
                     //var msg = Request.CreateResponse(HttpStatusCode.Created, Reg);
 
                 }
-                //var msg = Request.CreateResponse(HttpStatusCode.Created, doc);
+                var msg = Request.CreateResponse(HttpStatusCode.Created, donor);
                 return msg;
             }
             catch (Exception ex)
@@ -82,7 +82,7 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
         {
             try
             {
-                BloodDonor UL = DB.BloodDonor.FirstOrDefault(s => s.DonorID == id);
+                BloodDonor UL = DB.bloodDonor.FirstOrDefault(s => s.DonorID == id);
                 if (UL == null)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Blood Donor with Id " + id.ToString() + "not found to update");
@@ -109,20 +109,20 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
             }
         }
 
-        [Route("deleteBloodDonor")]
+       // [Route("deleteBloodDonor")]
         [HttpDelete]
         public HttpResponseMessage Delete(int id)
         {
             try
             {
-                var entity = DB.BloodDonor.FirstOrDefault(s => s.DonorID == id);
+                var entity = DB.bloodDonor.FirstOrDefault(s => s.DonorID == id);
                 if (entity == null)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Blood Donor with DonorId = " + id.ToString() + " not found to delete");
                 }
                 else
                 {
-                    DB.BloodDonor.Remove(entity);
+                    DB.bloodDonor.Remove(entity);
                     DB.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK);
                 }

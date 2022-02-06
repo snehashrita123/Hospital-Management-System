@@ -45,11 +45,11 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
         }
 
 
-        [Route("InsertDoctor")]
+        
         [HttpPost]
         public HttpResponseMessage Post([FromBody] Doctor doc)
         {
-            HttpResponseMessage msg = null;
+            //HttpResponseMessage msg = null;
             try
             {
                 Doctor UL = new Doctor();
@@ -71,7 +71,7 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
                     //var msg = Request.CreateResponse(HttpStatusCode.Created, Reg);
 
                 }
-                //var msg = Request.CreateResponse(HttpStatusCode.Created, doc);
+                var msg = Request.CreateResponse(HttpStatusCode.Created, doc);
                 return msg;
             }
             catch (Exception ex)
@@ -114,7 +114,7 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
         }
 
 
-        [Route("deleteDoctor")]
+        
         [HttpDelete]
         public HttpResponseMessage Delete(int id)
         {

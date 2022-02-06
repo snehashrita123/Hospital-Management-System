@@ -175,6 +175,10 @@
     <Compile Include="Migrations\202202040832111_Initial.designer.cs">
       <DependentUpon>202202040832111_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202202051950173_Blood_Donation.cs" />
+    <Compile Include="Migrations\202202051950173_Blood_Donation.designer.cs">
+      <DependentUpon>202202051950173_Blood_Donation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AppUser.cs" />
     <Compile Include="Models\BloodDonor.cs" />
@@ -272,6 +276,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202202040832111_Initial.resx">
       <DependentUpon>202202040832111_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202051950173_Blood_Donation.resx">
+      <DependentUpon>202202051950173_Blood_Donation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
