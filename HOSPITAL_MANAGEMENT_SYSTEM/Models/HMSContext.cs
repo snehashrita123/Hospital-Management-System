@@ -17,10 +17,12 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
 
         }
         public DbSet<AppUser> UserLogin { get; set; }
-        public DbSet<Doctor> doctor { get; set; }
+        public DbSet<DoctorDetails> DoctorInfo { get; set; }
         public DbSet<Patient_Details> patientrecord { get; set; }
-
         public DbSet<BloodDonor> bloodDonor { get; set; }
         public DbSet<BloodRequest> bloodRequest { get; set; }
+        public DbSet<Ambulance> ambulance { get; set; }
+        public DbSet<BloodType> bloodType { get; set; }
+        public DbSet<Vacc_reg> vacc_registration { get; set; }
     }
 }

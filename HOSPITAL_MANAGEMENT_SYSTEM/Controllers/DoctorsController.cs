@@ -4,18 +4,19 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using HOSPITAL_MANAGEMENT_SYSTEM.Models;
+
 
 
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 {
-
-    //[EnableCors("*", "*", "POST")]
-    [RoutePrefix("api/Doctors")]
-
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api/doctors")]
     public class DoctorsController : ApiController
     {
         HMSContext DB = new HMSContext();
+
 
 
 
@@ -24,13 +25,19 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
         public HttpResponseMessage Get()
         {
 
-            return Request.CreateResponse(HttpStatusCode.OK, DB.doctor.ToList());
+
+
+            return Request.CreateResponse(HttpStatusCode.OK, DB.DoctorInfo.ToList());
         }
+
+
 
         public HttpResponseMessage Get(int id)
         {
 
-            var entity = DB.doctor.FirstOrDefault(s => s.DoctorID == id);
+
+
+            var entity = DB.DoctorInfo.FirstOrDefault(s => s.DoctorID == id);
             if (entity != null)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, entity);
@@ -41,34 +48,40 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 
 
 
+
             }
         }
 
 
-        
+
+
+
         [HttpPost]
-        public HttpResponseMessage Post([FromBody] Doctor doc)
+        public HttpResponseMessage Post([FromBody] DoctorDetails doc)
         {
             //HttpResponseMessage msg = null;
             try
             {
-                Doctor UL = new Doctor();
+                DoctorDetails UL = new DoctorDetails();
                 if (UL.DoctorID == 0)
                 {
                     UL.Name = doc.Name;
-                    UL.Gender = doc.Gender;
-                    UL.PhoneNumber = doc.PhoneNumber;
-                    UL.Email = doc.Email;
-                    UL.WorkingDays = doc.WorkingDays;
-                    UL.Speciality = doc.Speciality;
-                    UL.Experience = doc.Experience;
+                UL.PhoneNumber = doc.PhoneNumber;
+                UL.Email = doc.Email;
+                UL.WorkingDays = doc.WorkingDays;
+                UL.Speciality = doc.Speciality;
+                UL.Experience = doc.Experience;
 
 
-                    DB.doctor.Add(UL);
-                    DB.SaveChanges();
+
+
+                DB.DoctorInfo.Add(UL);
+                DB.SaveChanges();
                     //return new Response
                     //{ Status = "Success", Message = "Record SuccessFully Saved." };
                     //var msg = Request.CreateResponse(HttpStatusCode.Created, Reg);
+
+
 
                 }
                 var msg = Request.CreateResponse(HttpStatusCode.Created, doc);
@@ -77,16 +90,20 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
             catch (Exception ex)
             {
 
+
+
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
         }
 
+
+
         [HttpPut]
-        public HttpResponseMessage Put([FromUri] int id, [FromBody] Doctor doc)
-         {
+        public HttpResponseMessage Put([FromUri] int id, [FromBody] DoctorDetails doc)
+        {
             try
             {
-                Doctor UL = DB.doctor.FirstOrDefault(s => s.DoctorID == id);
+                DoctorDetails UL = DB.DoctorInfo.FirstOrDefault(s => s.DoctorID == id);
                 if (UL == null)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Doctor with Id " + id.ToString() + "not found to update");
@@ -94,13 +111,17 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
                 else
                 {
 
+
+
                     UL.Name = doc.Name;
-                    UL.Gender = doc.Gender;
+                    //UL.Gender = doc.Gender;
                     UL.PhoneNumber = doc.PhoneNumber;
                     UL.Email = doc.Email;
                     UL.WorkingDays = doc.WorkingDays;
                     UL.Speciality = doc.Speciality;
                     UL.Experience = doc.Experience;
+
+
 
                     DB.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK, UL);
@@ -111,10 +132,14 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
 
+
+
         }
 
 
-        
+
+
+
         [HttpDelete]
         public HttpResponseMessage Delete(int id)
         {
@@ -123,18 +148,17 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 
 
 
-                var entity = DB.doctor.FirstOrDefault(s => s.DoctorID == id);
+
+                var entity = DB.DoctorInfo.FirstOrDefault(s => s.DoctorID == id);
                 if (entity == null)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Doctor with Id = " + id.ToString() + " not found to delete");
                 }
                 else
                 {
-                    DB.doctor.Remove(entity);
+                    DB.DoctorInfo.Remove(entity);
                     DB.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK);
-
-
 
                 }
             }
@@ -143,5 +167,6 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
         }
+
     }
 }

@@ -4,37 +4,29 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using HOSPITAL_MANAGEMENT_SYSTEM.Models;
 
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 {
-    [RoutePrefix("api/PatientsInsert")]
-    public class PatientsInsertController : ApiController
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api/PatientDetails")]
+    public class PatientDetailsController : ApiController
     {
         HMSContext DB = new HMSContext();
 
         [HttpGet]
-
-        public HttpResponseMessage Get()
+        public IHttpActionResult Get(string search)
         {
-            return Request.CreateResponse(HttpStatusCode.OK, DB.patientrecord.ToList());
-        }
-
-        [HttpGet]
-
-        public HttpResponseMessage Get(string email)
-        {
-
-            var entity = DB.patientrecord.FirstOrDefault(s => s.Email == email);
-            if (entity != null)
+            List<Patient_Details> result = DB.patientrecord.Where(x => x.Email.Equals(search)).ToList();
+            if (result.Count == 0)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, entity);
+                return Ok(new { status = 400, isSuccess = false, message = "Email does not exist" });
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, $"Patient with Email {email} not found");
 
-
+                return Ok(result);
             }
         }
 
@@ -69,41 +61,7 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
             }
         }
 
-        [HttpPut]
-
-        public HttpResponseMessage Put([FromUri] string email, [FromBody] Patient_Details patient)
-        {
-
-            try
-            {
-                Patient_Details entity = DB.patientrecord.FirstOrDefault(s => s.Email == email);
-                if (entity == null)
-                {
-                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Patient with Email " + email.ToString() + "not found to update");
-                }
-                else
-                {
-                    entity.FirstName = patient.FirstName;
-                    entity.LastName = patient.LastName;
-                    entity.Age = patient.Age;
-                    entity.gender = patient.gender;
-                    entity.ContactNumber = patient.ContactNumber;
-                    entity.Address = patient.Address;
-                    entity.Email = patient.Email;
-                    entity.Symptoms = patient.Symptoms;
-                    entity.Ward = patient.Ward;
-
-
-                    DB.SaveChanges();
-                    return Request.CreateResponse(HttpStatusCode.OK, entity);
-                }
-            }
-            catch (Exception ex)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
-            }
-
-        }
+       
 
         [HttpDelete]
         public HttpResponseMessage Delete([FromUri] int id)

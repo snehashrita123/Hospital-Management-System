@@ -4,16 +4,19 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using HOSPITAL_MANAGEMENT_SYSTEM.Models;
+ 
 
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/BloodDonor")]
     public class BloodDonorController : ApiController
     {
         HMSContext DB = new HMSContext();
 
-        [Route("BloodDonor")]
+       // [Route("BloodDonorShow")]
         [HttpGet]
         public HttpResponseMessage Get()
         {
@@ -35,16 +38,17 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
             }
         }
 
-        [Route("InsertBloodDonor")]
+        //[Route("InsertBloodDonor")]
         [HttpPost]
         public HttpResponseMessage Post([FromBody] BloodDonor donor)
         {
             //HttpResponseMessage msg = null;
 
-            if (DB.bloodDonor.Any(a => a.DonorPhoneNumber == donor.DonorPhoneNumber))
-            {
-                return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
-            }
+            //if (DB.bloodDonor.Any(a => a.DonorPhoneNumber == donor.DonorPhoneNumber))
+            //{
+            //    return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
+            //}
+            
             try
             {
                 BloodDonor UL = new BloodDonor();

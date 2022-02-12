@@ -24,7 +24,7 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
         public int RequestorAge { get; set; }
 
         [Required]
-        public int RequestorGender { get; set; }
+        public string RequestorGender { get; set; }
 
 
         [Required, MaxLength(10), RegularExpression(@"^[0-9]{10}$")]

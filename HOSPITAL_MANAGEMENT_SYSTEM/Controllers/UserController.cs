@@ -4,12 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using HOSPITAL_MANAGEMENT_SYSTEM.Models;
 
 
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 {
-    //[EnableCors("*", "*", "POST")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/User")]
     public class UserController : ApiController
     {
@@ -50,27 +51,15 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
         [Route("Login")]
         [HttpPost]
 
-
-
-
-
         public IHttpActionResult Post(Login login)
         {
-            var log = DB.UserLogin.Where(x => x.Email.Equals(login.Email) && x.Password.Equals(login.Password)).FirstOrDefault();
-
-
-
-
+           var log = DB.UserLogin.Where(x => x.Email.Equals(login.Email) && x.Password.Equals(login.Password)).FirstOrDefault();
 
             if (log == null)
             {
                 return Ok(new { status = 401, isSuccess = false, message = "Invalid User", });
             }
             else
-
-
-
-
 
                 return Ok(new { status = 200, isSuccess = true, message = "User Login successfully", UserDetails = log });
         }
@@ -112,15 +101,7 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
             catch (Exception ex)
             {
 
-
-
-
-
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
-
-
-
-
 
             }
             //return new Response
@@ -131,11 +112,6 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
         [HttpPut]
         public HttpResponseMessage Put([FromUri] string email, [FromBody] Login login)
         {
-
-
-
-
-
             try
             {
                 AppUser entity = DB.UserLogin.FirstOrDefault(s => s.Email == email);
@@ -149,11 +125,7 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
                     //log.Email = login.Email;
                     entity.Password = NewPassword;
 
-
-
-
-
-                    DB.SaveChanges();
+                      DB.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK, entity);
                 }
             }

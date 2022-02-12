@@ -4,15 +4,18 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using HOSPITAL_MANAGEMENT_SYSTEM.Models;
 
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    [RoutePrefix("api/BloodRequest")]
     public class BloodRequestController : ApiController
     {
         HMSContext DB = new HMSContext();
 
-        [Route("BloodRequest")]
+        //[Route("BloodRequestShow")]
         [HttpGet]
         public HttpResponseMessage Get()
         {
@@ -34,7 +37,7 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
             }
         }
 
-        [Route("InsertBloodRequest")]
+        //[Route("InsertBloodRequest")]
         [HttpPost]
         public HttpResponseMessage Post([FromBody] BloodRequest requestor)
         {
@@ -108,7 +111,7 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
             }
         }
 
-        [Route("deleteBloodRequestor")]
+        //[Route("deleteBloodRequestor")]
         [HttpDelete]
         public HttpResponseMessage Delete(int id)
         {
