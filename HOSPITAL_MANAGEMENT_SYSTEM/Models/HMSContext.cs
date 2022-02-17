@@ -24,5 +24,8 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Models
         public DbSet<Ambulance> ambulance { get; set; }
         public DbSet<BloodType> bloodType { get; set; }
         public DbSet<Vacc_reg> vacc_registration { get; set; }
+        public DbSet<Bill> bill1 { get; set; }
+        public DbSet<AppointmentDetails> AppointmentInfo { get; set; }
+        public DbSet<Feedback> feedback { get; set; }
     }
 }

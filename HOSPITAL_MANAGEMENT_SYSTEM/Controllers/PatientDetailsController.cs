@@ -15,7 +15,9 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
     {
         HMSContext DB = new HMSContext();
 
+        [Route("getpateintbymail")]
         [HttpGet]
+        
         public IHttpActionResult Get(string search)
         {
             List<Patient_Details> result = DB.patientrecord.Where(x => x.Email.Equals(search)).ToList();

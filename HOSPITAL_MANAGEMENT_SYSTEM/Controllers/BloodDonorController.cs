@@ -38,6 +38,20 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
             }
         }
 
+        [Route("Searchdata")]
+        public IHttpActionResult Get(string search)
+        {
+            List<BloodDonor> result = DB.bloodDonor.Where(x => x.DonorPhoneNumber.Equals(search)).ToList();
+            if (result.Count == 0)
+            {
+                return Ok(new { status = 400, isSuccess = false, message = "Phone Number does not exist" });
+            }
+            else
+            {
+                return Ok(result);
+            }
+        }
+
         //[Route("InsertBloodDonor")]
         [HttpPost]
         public HttpResponseMessage Post([FromBody] BloodDonor donor)

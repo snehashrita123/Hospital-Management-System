@@ -17,12 +17,14 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 
         //[Route("BloodRequestShow")]
         [HttpGet]
+        
         public HttpResponseMessage Get()
         {
 
             return Request.CreateResponse(HttpStatusCode.OK, DB.bloodRequest.ToList());
         }
 
+        
         public HttpResponseMessage Get(int id)
         {
 
@@ -36,6 +38,21 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
                 return Request.CreateResponse(HttpStatusCode.NotFound, $"Blood Requester with RequestId {id} not found");
             }
         }
+        [Route("searchdata")]
+        public IHttpActionResult Get(string search)
+        {
+            List<BloodRequest> result = DB.bloodRequest.Where(x => x.RequestorPhoneNumber.Equals(search)).ToList();
+            if (result.Count == 0)
+            {
+                return Ok(new { status = 400, isSuccess = false, message = "Phone Number does not exist" });
+            }
+            else
+            {
+                return Ok(result);
+            }
+        }
+
+
 
         //[Route("InsertBloodRequest")]
         [HttpPost]

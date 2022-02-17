@@ -10,7 +10,7 @@ using HOSPITAL_MANAGEMENT_SYSTEM.Models;
 namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    [RoutePrefix("api/Ambulance")]
+    [RoutePrefix("api/Vaccination")]
     public class VaccinationController : ApiController
     {
         HMSContext DB = new HMSContext();
@@ -33,6 +33,7 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
         }
 
         [HttpPost]
+        [Route("Insert")]
         public HttpResponseMessage Post([FromBody] Vacc_reg obj)
         {
             try
@@ -55,6 +56,21 @@ namespace HOSPITAL_MANAGEMENT_SYSTEM.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex);
             }
+        }
+
+        [Route("Login")]
+        [HttpPost]
+        public IHttpActionResult PostLogin(Vacc_reg login)
+        {
+            var log = DB.vacc_registration.Where(x => x.AadharCard_Number.Equals(login.AadharCard_Number)).FirstOrDefault();
+
+            if (log == null)
+            {
+                return Ok(new { status = 401, isSuccess = false, message = "Invalid User", });
+            }
+            else
+
+                return Ok(new { status = 200, isSuccess = true, message = "User Login successfully", UserDetails = log });
         }
 
     }

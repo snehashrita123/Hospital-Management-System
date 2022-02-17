@@ -169,12 +169,15 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AmbulanceController.cs" />
+    <Compile Include="Controllers\AppointmentsController.cs" />
+    <Compile Include="Controllers\BillsController.cs" />
     <Compile Include="Controllers\BloodDonorAdminController.cs" />
     <Compile Include="Controllers\BloodRequestorAdminController.cs" />
     <Compile Include="Controllers\BloodDonorController.cs" />
     <Compile Include="Controllers\BloodRequestController.cs" />
     <Compile Include="Controllers\BloodTypeUnitController.cs" />
     <Compile Include="Controllers\DoctorsController.cs" />
+    <Compile Include="Controllers\FeedbacksController.cs" />
     <Compile Include="Controllers\PatientDetailsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\VaccinationController.cs" />
@@ -186,13 +189,28 @@
     <Compile Include="Migrations\202202110840162_Initial.designer.cs">
       <DependentUpon>202202110840162_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202202120838489_Bill.cs" />
+    <Compile Include="Migrations\202202120838489_Bill.designer.cs">
+      <DependentUpon>202202120838489_Bill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202120908014_AppointmentDetails.cs" />
+    <Compile Include="Migrations\202202120908014_AppointmentDetails.designer.cs">
+      <DependentUpon>202202120908014_AppointmentDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202202121923400_Feedback.cs" />
+    <Compile Include="Migrations\202202121923400_Feedback.designer.cs">
+      <DependentUpon>202202121923400_Feedback.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Ambulance.cs" />
+    <Compile Include="Models\AppointmentDetails .cs" />
     <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\Bill.cs" />
     <Compile Include="Models\BloodDonor.cs" />
     <Compile Include="Models\BloodRequest.cs" />
     <Compile Include="Models\BloodType.cs" />
     <Compile Include="Models\DoctorDetails.cs" />
+    <Compile Include="Models\Feedback.cs" />
     <Compile Include="Models\HMSContext.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Patient_Details.cs" />
@@ -287,6 +305,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202202110840162_Initial.resx">
       <DependentUpon>202202110840162_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202120838489_Bill.resx">
+      <DependentUpon>202202120838489_Bill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202120908014_AppointmentDetails.resx">
+      <DependentUpon>202202120908014_AppointmentDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202202121923400_Feedback.resx">
+      <DependentUpon>202202121923400_Feedback.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
